@@ -1,29 +1,90 @@
 <nav>
-  <ul class="nav-links">
+  <div class="logo">
+    <img src="../../assets/shared/logo.svg" alt="" />
+  </div>
+
+  <div class="horizontal-ruler"></div>
+
+  <ol class="nav-links">
+    <div class="bg"></div>
     <li><a href="/">Home</a></li>
     <li><a href="/destination">Destination</a></li>
     <li><a href="/crew">Crew</a></li>
     <li><a href="/technology">Technology</a></li>
-  </ul>
+  </ol>
 </nav>
 
 <style>
   nav {
-    padding: 1rem;
-    backdrop-filter: blur(1rem);
+    padding-block: 2rem;
     position: fixed;
     width: 100%;
+
+    font-family: "Barlow Condensed", sans-serif;
+    text-transform: uppercase;
+
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    justify-self: center;
+  }
+
+  .horizontal-ruler {
+    background: #979797;
+    height: 1px;
   }
 
   .nav-links {
-    padding: 0;
     margin: 0;
+    padding: 0;
     list-style: none;
+    counter-reset: nav-counter -1;
+
+    grid-column: span 6 / 12;
     display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .nav-links .bg {
+    backdrop-filter: blur(1rem);
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    scale: 140% 1;
+  }
+
+  .nav-links li {
+    counter-increment: nav-counter;
+  }
+
+  .nav-links li::before {
+    content: "0" counter(nav-counter);
+    font-weight: bold;
   }
 
   .nav-links a {
     display: inline-block;
-    padding: 1rem;
+    padding: 2rem 1rem;
+    color: inherit;
+    text-decoration: none;
+    letter-spacing: 2.7px;
+  }
+
+  @media screen and (max-width: 60em) {
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .horizontal-ruler {
+      display: none;
+    }
   }
 </style>
