@@ -59,6 +59,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     text-decoration: none;
     width: 300px;
     height: 300px;
+    aspect-ratio: 1 / 1;
     border-radius: 50%;
     text-transform: uppercase;
     font-size: 2rem;
@@ -72,5 +73,26 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .btn--cta:hover {
     box-shadow: 0 0 0 60px #97979744;
     cursor: pointer;
+  }
+
+  @media screen and (max-width: 65em) {
+    main {
+      background-image: url("../../assets/home/background-home-tablet.jpg");
+    }
+    .hero {
+      text-align: center;
+      padding-block: 6rem 3rem;
+    }
+
+    .btn--cta {
+      width: 242px;
+      height: 242px;
+    }
+  }
+
+  @media screen and (max-width: 50em) {
+    main {
+      background-image: url("../../assets/home/background-home-mobile.jpg");
+    }
   }
 </style>

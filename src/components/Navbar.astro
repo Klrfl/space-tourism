@@ -7,11 +7,20 @@
 
   <ol class="nav-links">
     <div class="bg"></div>
+    <div class="nav-links__header">
+      <button class="nav-btn close">
+        <img src="../../assets/shared/icon-close.svg" alt="" />
+      </button>
+    </div>
     <li><a href="/">Home</a></li>
     <li><a href="/destination">Destination</a></li>
     <li><a href="/crew">Crew</a></li>
     <li><a href="/technology">Technology</a></li>
   </ol>
+
+  <button class="nav-btn open">
+    <img src="../../assets/shared/icon-hamburger.svg" alt="" />
+  </button>
 </nav>
 
 <style>
@@ -52,11 +61,16 @@
   }
 
   .nav-links .bg {
+    background: #fff2;
     backdrop-filter: blur(1rem);
     position: absolute;
     inset: 0;
     z-index: -1;
     scale: 140% 1;
+  }
+
+  .nav-links__header {
+    display: none;
   }
 
   .nav-links li {
@@ -76,15 +90,79 @@
     letter-spacing: 2.7px;
   }
 
-  @media screen and (max-width: 60em) {
+  .nav-btn {
+    display: none;
+    color: var(--accent);
+    width: 2rem;
+    height: 2rem;
+    aspect-ratio: 1 / 1;
+  }
+
+  @media screen and (max-width: 65em) {
     nav {
+      padding-inline: 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
+    }
+
+    .nav-links li::before {
+      content: "";
     }
 
     .horizontal-ruler {
       display: none;
     }
   }
+
+  @media screen and (max-width: 50em) {
+    .nav-links {
+      position: absolute;
+      inset: 0 0 0 auto;
+      min-height: 100vh;
+      min-width: 60vw;
+
+      flex-direction: column;
+      justify-content: start;
+      gap: unset;
+      z-index: 10;
+      translate: 100% 0;
+      transition: translate 200ms ease;
+    }
+
+    .nav-links.active {
+      translate: 0 0;
+    }
+
+    .nav-links__header {
+      padding: 2rem;
+      font-size: 2rem;
+      display: flex;
+      justify-content: end;
+    }
+
+    .nav-links li {
+      padding-inline: 2rem;
+    }
+
+    .nav-links li::before {
+      content: "0" counter(nav-counter);
+    }
+
+    .nav-links a {
+      padding: 1rem;
+    }
+
+    .nav-btn {
+      display: block;
+    }
+
+    .nav-links .bg {
+      scale: 1 1;
+    }
+  }
 </style>
+
+<script>
+  import "../scripts/navbar.js";
+</script>
