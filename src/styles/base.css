@@ -48,12 +48,3 @@ h5,
 h6 {
   overflow-wrap: break-word;
 }
-
-h1,
-h2,
-h3,
-h4 {
-  font-family: "Bellefair", serif;
-  line-height: 1;
-  margin-block: 0;
-}

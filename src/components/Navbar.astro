@@ -45,6 +45,8 @@
   .horizontal-ruler {
     background: #979797;
     height: 1px;
+    grid-column: 2 / 5;
+    grid-row: 1;
   }
 
   .nav-links {
@@ -54,9 +56,10 @@
     counter-reset: nav-counter -1;
 
     grid-column: span 6 / 12;
+    grid-row: 1;
     display: flex;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1.2rem;
     position: relative;
   }
 
@@ -88,6 +91,23 @@
     color: inherit;
     text-decoration: none;
     letter-spacing: 2.7px;
+    position: relative;
+  }
+
+  .nav-links a::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    height: 0.125rem;
+    scale: 0;
+    transition: scale 200ms ease;
+  }
+
+  .nav-links a:hover::before {
+    scale: 1;
   }
 
   .nav-btn {
@@ -100,6 +120,7 @@
 
   @media screen and (max-width: 65em) {
     nav {
+      padding-block: 0;
       padding-inline: 2rem;
       display: flex;
       align-items: center;
@@ -116,6 +137,10 @@
   }
 
   @media screen and (max-width: 50em) {
+    nav {
+      padding-block: 2rem;
+    }
+
     .nav-links {
       position: absolute;
       inset: 0 0 0 auto;

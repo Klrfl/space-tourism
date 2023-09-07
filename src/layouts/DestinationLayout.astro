@@ -25,11 +25,11 @@ const { destination, places } = Astro.props;
         </p>
 
         <div class="stats">
-          <div class="distance">
+          <div class="stats__distance">
             <h3><abbr title="average">Avg.</abbr> Distance</h3>
             <p>{destination.distance}</p>
           </div>
-          <div class="travel-time">
+          <div class="starts__travel-time">
             <h3><abbr title="estimated">Est.</abbr> travel time</h3>
             <p>{destination.travel}</p>
           </div>
@@ -55,6 +55,8 @@ const { destination, places } = Astro.props;
 
   .main-section {
     display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
     grid-template-areas:
       "heading heading"
       "content text";
@@ -62,6 +64,7 @@ const { destination, places } = Astro.props;
 
   h1 {
     grid-area: heading;
+    justify-self: start;
   }
 
   .main-section__text {
@@ -100,5 +103,26 @@ const { destination, places } = Astro.props;
   .stats > * {
     flex: 1 1 0;
     padding-block: 1.5rem;
+  }
+
+  .stats p {
+    font-family: "Bellefair", serif;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+
+  @media screen and (max-width: 60em) {
+    .main-section {
+      text-align: center;
+
+      grid-template-areas: "heading" "content" "text";
+      grid-template-columns: 1fr;
+      gap: unset;
+    }
+
+    .main-section__nav ul {
+      justify-content: center;
+    }
   }
 </style>

@@ -4,6 +4,16 @@ h3,
 h4,
 h5 {
   text-transform: uppercase;
+  font-weight: 300;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Bellefair", serif;
+  line-height: 1;
+  margin-block: 0;
 }
 
 .fancy-heading {
@@ -17,6 +27,11 @@ h1.fancy-heading {
 
 h2.fancy-heading {
   font-size: 100px;
+}
+
+h3 {
+  font-family: "Barlow Condensed", sans-serif;
+  letter-spacing: 2.36px;
 }
 
 h3.fancy-heading {
@@ -33,7 +48,7 @@ h5.fancy-heading {
 }
 
 .main-section {
-  padding-block: 5rem;
+  padding-block: 8rem 0;
   color: var(--accent);
   grid-column: 2 / span 10;
 
@@ -49,6 +64,7 @@ h5.fancy-heading {
 
 @media screen and (max-width: 65em) {
   .main-section {
+    padding-block: 6rem 0;
     flex-direction: column;
     align-items: center;
   }
