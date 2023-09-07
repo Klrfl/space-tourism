@@ -6,7 +6,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   <main>
     <section class="main-section hero">
       <div class="main-section__text">
-        <p>So, you want to travel to</p>
+        <p class="subtitle">So, you want to travel to</p>
         <h1>Space</h1>
         <p>
           So, you want to travel to Space Let’s face it; if you want to go to
@@ -16,7 +16,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
         </p>
       </div>
       <div class="main-section__content">
-        <div class="btn btn--cta">Explore</div>
+        <a href="/destination" class="btn btn--cta">Explore</a>
       </div>
     </section>
   </main>
@@ -35,19 +35,42 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
   .hero {
     min-height: 100vh;
+  }
 
-    display: flex;
-    align-items: center;
+  .subtitle {
+    font-family: "Barlow Condensed", sans-serif;
+    letter-spacing: 4.72px;
+    font-size: 2rem;
+    text-transform: uppercase;
   }
 
   .hero h1 {
     text-transform: uppercase;
+    color: var(--white);
   }
 
-  .main-section {
-    grid-column: 2 / span 10;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .main-section__text {
+    flex-basis: min-content;
+  }
+
+  .btn--cta {
+    background: var(--white);
+    color: var(--black);
+    text-decoration: none;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    text-transform: uppercase;
+    font-size: 2rem;
+    font-family: "Bellefair", serif;
+    transition: box-shadow 200ms ease;
+
+    display: grid;
+    place-items: center;
+  }
+
+  .btn--cta:hover {
+    box-shadow: 0 0 0 60px #97979744;
+    cursor: pointer;
   }
 </style>
