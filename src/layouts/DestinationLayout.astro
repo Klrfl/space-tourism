@@ -1,0 +1,67 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+const { destination, places } = Astro.props;
+---
+
+<BaseLayout>
+  <main>
+    <h1>Pick your destination</h1>
+    <section class="main-section">
+      <div class="main-section__text">
+        <nav>
+          <ul>
+            {
+              places.map((place) => (
+                <li>
+                  <a href={place.toLowerCase()}>{place}</a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <h2 class="fancy-heading">{destination.name}</h2>
+        <p>
+          {destination.description}
+        </p>
+
+        <div class="stats">
+          <div class="distance">
+            <h3><abbr title="average">Avg.</abbr> Distance</h3>
+            <p>{destination.distance}</p>
+          </div>
+          <div class="travel-time">
+            <h3><abbr title="estimated">Est.</abbr> travel time</h3>
+            <p>{destination.travel}</p>
+          </div>
+        </div>
+      </div>
+      <div class="main-section__content">
+        <img src="../../assets/destination/image-moon.webp" alt="" />
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    background-image: url("../../assets/destination/background-destination-desktop.jpg");
+    background-size: cover;
+    background-position: center;
+
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  h1 {
+    grid-column: span 12;
+  }
+
+  .main-section__content {
+    order: -1;
+  }
+
+  .stats {
+    border-top: 2px solid #383b4b;
+  }
+</style>

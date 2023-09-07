@@ -1,0 +1,21 @@
+---
+import DestinationLayout from "../../layouts/DestinationLayout.astro";
+import * as data from "../../data.json";
+
+export async function getStaticPaths() {
+  return data.destinations.map((destination) => {
+    return {
+      params: { place: destination.name.toLowerCase() },
+      props: {
+        destination,
+        places: data.destinations.map((destination) => destination.name),
+      },
+    };
+  });
+}
+
+const { place } = Astro.params;
+const { destination, places } = Astro.props;
+---
+
+<DestinationLayout title="dsjfsdf" destination={destination} places={places} />
