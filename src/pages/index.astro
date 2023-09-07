@@ -5,13 +5,17 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <BaseLayout>
   <section class="main-section hero">
     <div class="main-section__text">
-      <h1>Ga tau judulnya apa</h1>
+      <p>So, you want to travel to</p>
+      <h1>Space</h1>
       <p>
         So, you want to travel to Space Let’s face it; if you want to go to
         space, you might as well genuinely go to outer space and not hover kind
         of on the edge of it. Well sit back, and relax because we’ll give you a
-        truly out of this world experience! Explore
+        truly out of this world experience!
       </p>
+    </div>
+    <div class="main-section__content">
+      <div class="btn btn--cta">Explore</div>
     </div>
   </section>
 </BaseLayout>
@@ -19,12 +23,16 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 <style>
   .hero {
     background-image: url("../../assets/home/background-home-desktop.jpg");
-    background-size: contain;
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     min-height: 100vh;
 
     display: flex;
     align-items: center;
+  }
+
+  .hero h1 {
+    text-transform: uppercase;
   }
 </style>
