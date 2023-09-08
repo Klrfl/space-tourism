@@ -45,6 +45,7 @@ h4.fancy-heading {
 h5.fancy-heading {
   font-family: "Barlow Condensed Regular", serif;
   font-size: 28px;
+  color: var(--accent);
 }
 
 .main-section {

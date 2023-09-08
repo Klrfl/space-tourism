@@ -63,8 +63,18 @@ const { destination, places } = Astro.props;
   }
 
   h1 {
+    font-family: "Barlow Condensed", sans-serif;
+    letter-spacing: 4.72px;
+    color: var(--white);
     grid-area: heading;
     justify-self: start;
+  }
+
+  h1::before {
+    content: "01";
+    font-weight: 700;
+    color: #fff5;
+    margin-inline-end: 1.5rem;
   }
 
   .main-section__text {
