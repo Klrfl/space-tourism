@@ -3,7 +3,7 @@ import BaseLayout from "./BaseLayout.astro";
 const { destination, places } = Astro.props;
 ---
 
-<BaseLayout>
+<BaseLayout title={`Destinations | ${destination.name}`}>
   <main>
     <section class="main-section">
       <h1>Pick your destination</h1>
@@ -123,6 +123,10 @@ const { destination, places } = Astro.props;
   }
 
   @media screen and (max-width: 60em) {
+    main {
+      background-image: url("../../assets/destination/background-destination-tablet.jpg");
+    }
+
     .main-section {
       text-align: center;
 
@@ -133,6 +137,12 @@ const { destination, places } = Astro.props;
 
     .main-section__nav ul {
       justify-content: center;
+    }
+  }
+
+  @media screen and (max-width: 50em) {
+    main {
+      background-image: url("../../assets/destination/background-destination-mobile.jpg");
     }
   }
 </style>
