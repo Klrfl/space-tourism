@@ -1,0 +1,91 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const title = "Crew";
+---
+
+<BaseLayout title={title}>
+  <main>
+    <section class="main-section">
+      <h1>Meet your crew</h1>
+      <nav class="main-section__nav">
+        <ul>
+          <li><a href="#">Douglas Hurley</a></li>
+          <li><a href="#">Mark Shuttleworth</a></li>
+          <li><a href="#">Victor Glover</a></li>
+          <li><a href="#">Anousheh Ansari</a></li>
+        </ul>
+      </nav>
+
+      <div class="main-section__text">
+        <h2 class="fancy-heading">Douglas Hurley</h2>
+        <h3 class="fancy-heading">Commander</h3>
+
+        <p>
+          Douglas Gerald Hurley is an American engineer, former Marine Corps
+          pilot and former NASA astronaut. He launched into space for the third
+          time as commander of Crew Dragon Demo-2.
+        </p>
+      </div>
+      <div class="main-section__content">
+        <img src="../../assets/crew/image-douglas-hurley.webp" alt="" />
+      </div>
+    </section>
+  </main>
+</BaseLayout>
+
+<style>
+  main {
+    background-image: url("../../assets/crew/background-crew-desktop.jpg");
+    background-size: cover;
+    background-position: center;
+
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+  }
+
+  .main-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "heading heading"
+      "text content"
+      "nav content";
+  }
+
+  .main-section__text {
+    grid-area: text;
+  }
+
+  .main-section__content {
+    grid-area: content;
+  }
+
+  .main-section__nav {
+    grid-area: nav;
+  }
+
+  @media screen and (max-width: 60em) {
+    main {
+      background-image: url("../../assets/crew/background-crew-tablet.jpg");
+    }
+
+    .main-section {
+      text-align: center;
+
+      grid-template-areas:
+        "heading "
+        "text "
+        "nav "
+        "content ";
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+  }
+
+  @media screen and (max-width: 50em) {
+    main {
+      background-image: url("../../assets/crew/background-crew-mobile.jpg");
+    }
+  }
+</style>
