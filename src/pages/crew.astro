@@ -9,10 +9,12 @@ const title = "Crew";
       <h1>Meet your crew</h1>
       <nav class="main-section__nav">
         <ul>
-          <li><a href="#">Douglas Hurley</a></li>
-          <li><a href="#">Mark Shuttleworth</a></li>
-          <li><a href="#">Victor Glover</a></li>
-          <li><a href="#">Anousheh Ansari</a></li>
+          <li><a href="#"><span class="sr-only">Douglas Hurley</span></a></li>
+          <li>
+            <a href="#"><span class="sr-only">Mark Shuttleworth</span></a>
+          </li>
+          <li><a href="#"><span class="sr-only">Victor Glover</span></a></li>
+          <li><a href="#"><span class="sr-only">Anousheh Ansari</span></a></li>
         </ul>
       </nav>
 
@@ -51,6 +53,11 @@ const title = "Crew";
       "heading heading"
       "text content"
       "nav content";
+    place-items: center;
+  }
+
+  h1 {
+    place-self: start;
   }
 
   .main-section__text {
@@ -59,10 +66,43 @@ const title = "Crew";
 
   .main-section__content {
     grid-area: content;
+    align-self: end;
   }
 
   .main-section__nav {
     grid-area: nav;
+    justify-self: start;
+  }
+
+  .main-section__nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    gap: 1rem;
+  }
+
+  .main-section a {
+    display: inline-block;
+    padding: 0.5rem;
+    aspect-ratio: 1 /1;
+    background: #fff2;
+    border-radius: 50%;
+  }
+
+  .main-section a.active {
+    background: var(--white);
+  }
+
+  .sr-only:not(:focus):not(:active) {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
   }
 
   @media screen and (max-width: 60em) {
@@ -80,6 +120,10 @@ const title = "Crew";
         "content ";
       grid-template-columns: 1fr;
       justify-items: center;
+    }
+
+    .main-section__nav {
+      justify-self: unset;
     }
   }
 
