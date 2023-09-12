@@ -1,43 +1,28 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 ---
 
-<BaseLayout>
-  <main>
-    <section class="main-section hero">
-      <div class="main-section__text">
-        <p class="subtitle">So, you want to travel to</p>
-        <h1 class="fancy-heading">Space</h1>
-        <p>
-          So, you want to travel to Space Let’s face it; if you want to go to
-          space, you might as well genuinely go to outer space and not hover
-          kind of on the edge of it. Well sit back, and relax because we’ll give
-          you a truly out of this world experience!
-        </p>
-      </div>
-      <div class="main-section__content">
-        <a href="/destination" class="btn btn--cta">Explore</a>
-      </div>
-    </section>
-  </main>
-</BaseLayout>
+<MainLayout
+  hero={true}
+  desktopBg="url(../../assets/home/background-home-desktop.jpg)"
+  tabletBg="url(../../assets/home/background-home-tablet.jpg)"
+  mobileBg="url(../../assets/home/background-home-mobile.jpg)">
+  <div slot="text">
+    <p class="subtitle">So, you want to travel to</p>
+    <h1 class="fancy-heading">Space</h1>
+    <p>
+      So, you want to travel to Space Let’s face it; if you want to go to space,
+      you might as well genuinely go to outer space and not hover kind of on the
+      edge of it. Well sit back, and relax because we’ll give you a truly out of
+      this world experience!
+    </p>
+  </div>
+  <div slot="content">
+    <a href="/destination/moon" class="btn btn--cta">Explore</a>
+  </div>
+</MainLayout>
 
 <style>
-  main {
-    background-image: url("../../assets/home/background-home-desktop.jpg");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-  }
-
-  .hero {
-    min-height: 100vh;
-    padding-block-end: 4rem;
-  }
-
   .subtitle {
     font-family: "Barlow Condensed", sans-serif;
     letter-spacing: 4.72px;
@@ -73,23 +58,9 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   }
 
   @media screen and (max-width: 65em) {
-    main {
-      background-image: url("../../assets/home/background-home-tablet.jpg");
-    }
-    .hero {
-      text-align: center;
-      padding-block: 6rem 3rem;
-    }
-
     .btn--cta {
       width: 242px;
       height: 242px;
-    }
-  }
-
-  @media screen and (max-width: 50em) {
-    main {
-      background-image: url("../../assets/home/background-home-mobile.jpg");
     }
   }
 </style>

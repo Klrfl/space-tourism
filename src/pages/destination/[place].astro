@@ -1,5 +1,5 @@
 ---
-import DestinationLayout from "../../layouts/DestinationLayout.astro";
+import MainLayout from "../../layouts/MainLayout.astro";
 import * as data from "../../data.json";
 
 export async function getStaticPaths() {
@@ -18,4 +18,103 @@ const { place } = Astro.params;
 const { destination, places } = Astro.props;
 ---
 
-<DestinationLayout title="dsjfsdf" destination={destination} places={places} />
+<MainLayout
+  destination={true}
+  title={`Destinations | ${destination.name}`}
+  desktopBg="url(../../assets/destination/background-destination-desktop.jpg)"
+  tabletBg="url(../../assets/destination/background-destination-tablet.jpg)"
+  mobileBg="url(../../assets/destination/background-destination-mobile.jpg)">
+  <ul slot="nav">
+    {
+      places.map((place) => (
+        <li>
+          <a href={place.toLowerCase()}>{place}</a>
+        </li>
+      ))
+    }
+  </ul>
+
+  <div slot="text">
+    <h1>Pick your destination</h1>
+
+    <h2 class="fancy-heading">{place}</h2>
+    <p>
+      {destination.description}
+    </p>
+
+    <div class="stats">
+      <div class="stats__distance">
+        <h3><abbr title="average">Avg.</abbr> Distance</h3>
+        <p>{destination.distance}</p>
+      </div>
+      <div class="starts__travel-time">
+        <h3><abbr title="estimated">Est.</abbr> travel time</h3>
+        <p>{destination.travel}</p>
+      </div>
+    </div>
+  </div>
+
+  <img src={destination.images.png} alt="" slot="content" />
+</MainLayout>
+<style>
+  h1 {
+    font-family: "Barlow Condensed", sans-serif;
+    letter-spacing: 4.72px;
+    text-transform: uppercase;
+    color: var(--white);
+    grid-area: heading;
+    justify-self: start;
+  }
+
+  h1::before {
+    content: "01";
+    font-weight: 700;
+    color: #fff5;
+    margin-inline-end: 1.5rem;
+  }
+
+  .main-section__text {
+    grid-area: text;
+    max-width: 60ch;
+  }
+
+  .main-section__content {
+    grid-area: content;
+  }
+
+  .main-section__nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    display: flex;
+  }
+
+  .main-section__nav a {
+    display: inline-block;
+    padding: 1rem;
+    font-family: "Barlow Condensed", sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 2.7px;
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .stats {
+    border-top: 2px solid #383b4b;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .stats > * {
+    flex: 1 1 0;
+    padding-block: 1.5rem;
+  }
+
+  .stats p {
+    font-family: "Bellefair", serif;
+    font-size: 28px;
+    text-transform: uppercase;
+    color: var(--white);
+  }
+</style>
