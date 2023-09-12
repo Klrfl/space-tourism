@@ -9,7 +9,10 @@ const {
   destination = false,
   crew = false,
   technology = false,
+  navLinks,
 } = Astro.props;
+
+console.log(navLinks);
 ---
 
 <BaseLayout title={title}>
@@ -25,7 +28,13 @@ const {
       {
         !hero && (
           <nav class="main-section__nav">
-            <slot name="nav" />
+            <ul>
+              {navLinks.map((navLink: string) => (
+                <li>
+                  <a href={navLink.toLowerCase()}>{navLink}</a>
+                </li>
+              ))}
+            </ul>
           </nav>
         )
       }
@@ -37,79 +46,97 @@ const {
         <slot name="content" />
       </div>
     </section>
+
+    <style define:vars={{ desktopBg, tabletBg, mobileBg }} lang="scss">
+      main {
+        background-image: var(--desktopBg);
+        background-size: cover;
+        background-position: center;
+
+        min-height: 100vh;
+        display: grid;
+        grid-template-columns: repeat(12, 1fr);
+
+        @media screen and (max-width: 65em) {
+          background-image: var(--tabletBg);
+          text-align: center;
+        }
+
+        @media screen and (max-width: 50em) {
+          background-image: var(--mobileBg);
+        }
+      }
+
+      .main-section {
+        color: var(--accent);
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        place-items: center;
+        padding-block: 6rem 3rem;
+      }
+
+      .main-section.hero {
+        min-height: 100vh;
+
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 2rem;
+
+        @media screen and (max-width: 65em) {
+          justify-content: space-around;
+          flex-direction: column;
+          align-items: center;
+
+          &__content img {
+            max-height: 350px;
+          }
+        }
+      }
+
+      .main-section.destination {
+        grid-template-areas:
+          "heading heading"
+          "content nav"
+          "content text";
+
+        .main-section__text {
+          grid-area: text;
+        }
+
+        .main-section__content {
+          grid-area: content;
+        }
+        .main-section__nav {
+          grid-area: nav;
+
+          ul {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+
+            display: flex;
+          }
+
+          a {
+            display: inline-block;
+            padding: 1rem;
+            font-family: "Barlow Condensed", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2.7px;
+            color: inherit;
+            text-decoration: none;
+          }
+        }
+
+        @media screen and (max-width: 60em) {
+          text-align: center;
+
+          grid-template-areas: "heading" "content" "nav" "text";
+          grid-template-columns: 1fr;
+          gap: unset;
+        }
+      }
+    </style>
   </main>
 </BaseLayout>
-
-<style define:vars={{ desktopBg, tabletBg, mobileBg }} lang="scss">
-  main {
-    background-image: var(--desktopBg);
-    background-size: cover;
-    background-position: center;
-
-    min-height: 100vh;
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-
-    @media screen and (max-width: 65em) {
-      background-image: var(--tabletBg);
-      text-align: center;
-    }
-
-    @media screen and (max-width: 50em) {
-      background-image: var(--mobileBg);
-    }
-  }
-
-  .main-section {
-    color: var(--accent);
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    place-items: center;
-    padding-block: 6rem 3rem;
-  }
-
-  .main-section.hero {
-    min-height: 100vh;
-
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: 2rem;
-
-    @media screen and (max-width: 65em) {
-      justify-content: space-around;
-      flex-direction: column;
-      align-items: center;
-
-      &__content img {
-        max-height: 350px;
-      }
-    }
-  }
-
-  .main-section.destination {
-    grid-template-areas:
-      "heading heading"
-      "content nav"
-      "content text";
-
-    .main-section__text {
-      grid-area: text;
-    }
-
-    .main-section__content {
-      grid-area: content;
-    }
-    .main-section__nav {
-      grid-area: nav;
-    }
-
-    @media screen and (max-width: 60em) {
-      text-align: center;
-
-      grid-template-areas: "heading" "content" "nav" "text";
-      grid-template-columns: 1fr;
-      gap: unset;
-    }
-  }
-</style>

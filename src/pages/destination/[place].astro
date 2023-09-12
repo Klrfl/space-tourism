@@ -20,20 +20,11 @@ const { destination, places } = Astro.props;
 
 <MainLayout
   destination={true}
+  navLinks={places}
   title={`Destinations | ${destination.name}`}
   desktopBg="url(../../assets/destination/background-destination-desktop.jpg)"
   tabletBg="url(../../assets/destination/background-destination-tablet.jpg)"
   mobileBg="url(../../assets/destination/background-destination-mobile.jpg)">
-  <ul slot="nav">
-    {
-      places.map((place) => (
-        <li>
-          <a href={place.toLowerCase()}>{place}</a>
-        </li>
-      ))
-    }
-  </ul>
-
   <div slot="text">
     <h1>Pick your destination</h1>
 
@@ -80,24 +71,6 @@ const { destination, places } = Astro.props;
 
   .main-section__content {
     grid-area: content;
-  }
-
-  .main-section__nav ul {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-
-    display: flex;
-  }
-
-  .main-section__nav a {
-    display: inline-block;
-    padding: 1rem;
-    font-family: "Barlow Condensed", sans-serif;
-    text-transform: uppercase;
-    letter-spacing: 2.7px;
-    color: inherit;
-    text-decoration: none;
   }
 
   .stats {
