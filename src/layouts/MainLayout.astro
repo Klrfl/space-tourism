@@ -25,9 +25,13 @@ console.log(navLinks);
         { crew: crew },
         { technology: technology },
       ]}>
-      {
-        !hero && (
-          <nav class="main-section__nav">
+      <div class="main-section__heading">
+        <slot name="heading" />
+      </div>
+
+      <nav class="main-section__nav">
+        {
+          destination && (
             <ul>
               {navLinks.map((navLink: string) => (
                 <li>
@@ -35,9 +39,22 @@ console.log(navLinks);
                 </li>
               ))}
             </ul>
-          </nav>
-        )
-      }
+          )
+        }
+        {
+          crew && (
+            <ul>
+              {navLinks.map((navLink: string) => (
+                <li>
+                  <a href="#">
+                    <span class="sr-only">{navLink}</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </nav>
 
       <div class="main-section__text">
         <slot name="text" />
@@ -73,6 +90,32 @@ console.log(navLinks);
         grid-template-columns: repeat(2, 1fr);
         place-items: center;
         padding-block: 6rem 3rem;
+
+        @media screen and (max-width: 60em) {
+          text-align: center;
+        }
+      }
+
+      .main-section__heading {
+        justify-self: start;
+        grid-area: heading;
+      }
+
+      .main-section__nav ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+
+        display: flex;
+        grid-area: nav;
+      }
+
+      .main-section__text {
+        grid-area: text;
+      }
+
+      .main-section__content {
+        grid-area: content;
       }
 
       .main-section.hero {
@@ -100,33 +143,14 @@ console.log(navLinks);
           "content nav"
           "content text";
 
-        .main-section__text {
-          grid-area: text;
-        }
-
-        .main-section__content {
-          grid-area: content;
-        }
-        .main-section__nav {
-          grid-area: nav;
-
-          ul {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-
-            display: flex;
-          }
-
-          a {
-            display: inline-block;
-            padding: 1rem;
-            font-family: "Barlow Condensed", sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 2.7px;
-            color: inherit;
-            text-decoration: none;
-          }
+        a {
+          display: inline-block;
+          padding: 1rem;
+          font-family: "Barlow Condensed", sans-serif;
+          text-transform: uppercase;
+          letter-spacing: 2.7px;
+          color: inherit;
+          text-decoration: none;
         }
 
         @media screen and (max-width: 60em) {
@@ -135,6 +159,44 @@ console.log(navLinks);
           grid-template-areas: "heading" "content" "nav" "text";
           grid-template-columns: 1fr;
           gap: unset;
+        }
+      }
+
+      .main-section.crew {
+        grid-template-areas:
+          "heading heading"
+          "text content"
+          "nav content";
+
+        .main-section__nav a {
+          display: inline-block;
+          padding: 0.5rem;
+          aspect-ratio: 1 /1;
+          background: #fff2;
+          border-radius: 50%;
+        }
+
+        .sr-only:not(:focus):not(:active) {
+          clip: rect(0 0 0 0);
+          clip-path: inset(50%);
+          height: 1px;
+          overflow: hidden;
+          position: absolute;
+          white-space: nowrap;
+          width: 1px;
+        }
+        @media screen and (min-width: 60em) {
+          grid-template-areas:
+            "heading "
+            "text "
+            "nav "
+            "content ";
+          grid-template-columns: 1fr;
+          justify-items: center;
+
+          .main-section__nav {
+            justify-self: unset;
+          }
         }
       }
     </style>

@@ -25,9 +25,9 @@ const { destination, places } = Astro.props;
   desktopBg="url(../../assets/destination/background-destination-desktop.jpg)"
   tabletBg="url(../../assets/destination/background-destination-tablet.jpg)"
   mobileBg="url(../../assets/destination/background-destination-mobile.jpg)">
-  <div slot="text">
-    <h1>Pick your destination</h1>
+  <h1 slot="heading">Pick your destination</h1>
 
+  <div slot="text">
     <h2 class="fancy-heading">{place}</h2>
     <p>
       {destination.description}
@@ -53,8 +53,6 @@ const { destination, places } = Astro.props;
     letter-spacing: 4.72px;
     text-transform: uppercase;
     color: var(--white);
-    grid-area: heading;
-    justify-self: start;
   }
 
   h1::before {
@@ -65,14 +63,8 @@ const { destination, places } = Astro.props;
   }
 
   .main-section__text {
-    grid-area: text;
     max-width: 60ch;
   }
-
-  .main-section__content {
-    grid-area: content;
-  }
-
   .stats {
     border-top: 2px solid #383b4b;
     display: flex;
