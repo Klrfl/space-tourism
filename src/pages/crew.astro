@@ -17,16 +17,17 @@ const mobileBg = "../../assets/crew/background-crew-desktop.jpg";
   mobileBg={`url(${mobileBg})`}>
   <h1 slot="heading">Meet your crew</h1>
 
-  <div slot="text">
+  <div slot="text" class="heading">
     <h2 class="fancy-heading">Douglas Hurley</h2>
     <h3 class="fancy-heading">Commander</h3>
-
-    <p>
-      Douglas Gerald Hurley is an American engineer, former Marine Corps pilot
-      and former NASA astronaut. He launched into space for the third time as
-      commander of Crew Dragon Demo-2.
-    </p>
   </div>
+
+  <p slot="text">
+    Douglas Gerald Hurley is an American engineer, former Marine Corps pilot and
+    former NASA astronaut. He launched into space for the third time as
+    commander of Crew Dragon Demo-2.
+  </p>
+
   <div slot="content">
     <img src="../../assets/crew/image-douglas-hurley.webp" alt="" />
   </div>
@@ -43,5 +44,21 @@ const mobileBg = "../../assets/crew/background-crew-desktop.jpg";
 
   .main-section a.active {
     background: var(--white);
+  }
+
+  .heading {
+    display: flex;
+    flex-direction: column;
+  }
+
+  h2.fancy-heading {
+    font-size: 56px;
+  }
+
+  h3.fancy-heading {
+    order: -1;
+    font-size: 32px;
+    font-family: "Bellefair", serif;
+    color: #ddda;
   }
 </style>

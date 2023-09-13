@@ -11,24 +11,21 @@ const {
   technology = false,
   navLinks,
 } = Astro.props;
-
-console.log(navLinks);
 ---
 
 <BaseLayout title={title}>
-  <main>
-    <section
-      class:list={[
-        "main-section",
-        { hero: hero },
-        { destination: destination },
-        { crew: crew },
-        { technology: technology },
-      ]}>
-      <div class="main-section__heading">
-        <slot name="heading" />
-      </div>
+  <main
+    class:list={[
+      { hero: hero },
+      { destination: destination },
+      { crew: crew },
+      { technology: technology },
+    ]}>
+    <div class="heading">
+      <slot name="heading" />
+    </div>
 
+    <section class="main-section">
       <nav class="main-section__nav">
         {
           destination && (
@@ -63,142 +60,190 @@ console.log(navLinks);
         <slot name="content" />
       </div>
     </section>
-
-    <style define:vars={{ desktopBg, tabletBg, mobileBg }} lang="scss">
-      main {
-        background-image: var(--desktopBg);
-        background-size: cover;
-        background-position: center;
-
-        min-height: 100vh;
-        display: grid;
-        grid-template-columns: repeat(12, 1fr);
-
-        @media screen and (max-width: 65em) {
-          background-image: var(--tabletBg);
-          text-align: center;
-        }
-
-        @media screen and (max-width: 50em) {
-          background-image: var(--mobileBg);
-        }
-      }
-
-      .main-section {
-        color: var(--accent);
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        place-items: center;
-        padding-block: 6rem 3rem;
-
-        @media screen and (max-width: 60em) {
-          text-align: center;
-        }
-      }
-
-      .main-section__heading {
-        justify-self: start;
-        grid-area: heading;
-      }
-
-      .main-section__nav ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-
-        display: flex;
-        grid-area: nav;
-      }
-
-      .main-section__text {
-        grid-area: text;
-      }
-
-      .main-section__content {
-        grid-area: content;
-      }
-
-      .main-section.hero {
-        min-height: 100vh;
-
-        display: flex;
-        align-items: end;
-        justify-content: space-between;
-        gap: 2rem;
-
-        @media screen and (max-width: 65em) {
-          justify-content: space-around;
-          flex-direction: column;
-          align-items: center;
-
-          &__content img {
-            max-height: 350px;
-          }
-        }
-      }
-
-      .main-section.destination {
-        grid-template-areas:
-          "heading heading"
-          "content nav"
-          "content text";
-
-        a {
-          display: inline-block;
-          padding: 1rem;
-          font-family: "Barlow Condensed", sans-serif;
-          text-transform: uppercase;
-          letter-spacing: 2.7px;
-          color: inherit;
-          text-decoration: none;
-        }
-
-        @media screen and (max-width: 60em) {
-          text-align: center;
-
-          grid-template-areas: "heading" "content" "nav" "text";
-          grid-template-columns: 1fr;
-          gap: unset;
-        }
-      }
-
-      .main-section.crew {
-        grid-template-areas:
-          "heading heading"
-          "text content"
-          "nav content";
-
-        .main-section__nav a {
-          display: inline-block;
-          padding: 0.5rem;
-          aspect-ratio: 1 /1;
-          background: #fff2;
-          border-radius: 50%;
-        }
-
-        .sr-only:not(:focus):not(:active) {
-          clip: rect(0 0 0 0);
-          clip-path: inset(50%);
-          height: 1px;
-          overflow: hidden;
-          position: absolute;
-          white-space: nowrap;
-          width: 1px;
-        }
-        @media screen and (min-width: 60em) {
-          grid-template-areas:
-            "heading "
-            "text "
-            "nav "
-            "content ";
-          grid-template-columns: 1fr;
-          justify-items: center;
-
-          .main-section__nav {
-            justify-self: unset;
-          }
-        }
-      }
-    </style>
   </main>
 </BaseLayout>
+
+<style define:vars={{ desktopBg, tabletBg, mobileBg }} lang="scss">
+  main {
+    padding-block: 8rem 0;
+
+    background-image: var(--desktopBg);
+    background-size: cover;
+    background-position: center;
+
+    min-height: 100vh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    grid-template-columns: repeat(12, 1fr);
+
+    @media screen and (max-width: 60em) {
+      background-image: var(--tabletBg);
+      padding-block: 4rem 0;
+      text-align: center;
+    }
+
+    @media screen and (max-width: 50em) {
+      background-image: var(--mobileBg);
+    }
+  }
+
+  .heading {
+    padding-block: 3rem;
+    grid-column: 2 / span 10;
+
+    position: sticky;
+    top: 0;
+
+    @media screen and (max-width: 60em) {
+      grid-column: 1 / span 13;
+      padding-inline: 2rem;
+      text-align: left;
+    }
+  }
+
+  .main-section {
+    color: var(--accent);
+    grid-column: 2 / span 10;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    place-items: center;
+    gap: 2rem;
+
+    @media screen and (max-width: 60em) {
+      text-align: center;
+
+      &__content img {
+        max-width: 300px;
+      }
+    }
+  }
+
+  .main-section__nav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    display: flex;
+    grid-area: nav;
+  }
+
+  .main-section__text {
+    grid-area: text;
+  }
+
+  .main-section__content {
+    grid-area: content;
+    @media screen and (max-width: 60em) {
+      max-width: 300px;
+    }
+  }
+
+  .hero .main-section {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    grid-template-rows: auto 1fr;
+    gap: 2rem;
+
+    @media screen and (max-width: 60em) {
+      justify-content: space-around;
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+  .destination .main-section {
+    padding-block-end: 6rem;
+
+    grid-template-areas:
+      "content nav"
+      "content text";
+
+    .main-section__nav {
+      justify-self: start;
+    }
+
+    .main-section__content {
+      justify-self: start;
+    }
+
+    a {
+      display: inline-block;
+      padding: 1rem;
+      font-family: "Barlow Condensed", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 2.7px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    @media screen and (max-width: 60em) {
+      text-align: center;
+      padding-block: unset;
+
+      grid-template-areas:
+        "content"
+        "nav"
+        "text";
+      grid-template-columns: 1fr;
+      gap: unset;
+
+      .main-section__nav,
+      .main-section__content {
+        justify-self: unset;
+      }
+    }
+  }
+
+  .crew .main-section {
+    grid-template-areas:
+      "text content"
+      "nav content";
+
+    .main-section__nav {
+      justify-self: start;
+      ul {
+        justify-content: center;
+        gap: 2rem;
+      }
+    }
+
+    .main-section__nav a {
+      display: inline-block;
+      padding: 0.5rem;
+      aspect-ratio: 1 /1;
+      background: #fff2;
+      border-radius: 50%;
+    }
+
+    .main-section__content {
+      align-self: end;
+    }
+
+    .sr-only:not(:focus):not(:active) {
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      height: 1px;
+      overflow: hidden;
+      position: absolute;
+      white-space: nowrap;
+      width: 1px;
+    }
+
+    @media screen and (max-width: 60em) {
+      grid-template-areas:
+        "text "
+        "nav "
+        "content ";
+      grid-template-columns: 1fr;
+      justify-items: center;
+
+      .main-section__nav {
+        justify-self: unset;
+      }
+    }
+  }
+</style>

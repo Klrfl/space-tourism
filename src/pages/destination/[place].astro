@@ -27,26 +27,24 @@ const { destination, places } = Astro.props;
   mobileBg="url(../../assets/destination/background-destination-mobile.jpg)">
   <h1 slot="heading">Pick your destination</h1>
 
-  <div slot="text">
-    <h2 class="fancy-heading">{place}</h2>
-    <p>
-      {destination.description}
-    </p>
+  <h2 slot="text" class="fancy-heading">{place}</h2>
+  <p slot="text">
+    {destination.description}
+  </p>
 
-    <div class="stats">
-      <div class="stats__distance">
-        <h3><abbr title="average">Avg.</abbr> Distance</h3>
-        <p>{destination.distance}</p>
-      </div>
-      <div class="starts__travel-time">
-        <h3><abbr title="estimated">Est.</abbr> travel time</h3>
-        <p>{destination.travel}</p>
-      </div>
+  <div slot="text" class="stats">
+    <div class="stats__distance">
+      <h3><abbr title="average">Avg.</abbr> Distance</h3>
+      <p>{destination.distance}</p>
+    </div>
+    <div class="starts__travel-time">
+      <h3><abbr title="estimated">Est.</abbr> travel time</h3>
+      <p>{destination.travel}</p>
     </div>
   </div>
-
   <img src={destination.images.png} alt="" slot="content" />
 </MainLayout>
+
 <style>
   h1 {
     font-family: "Barlow Condensed", sans-serif;
