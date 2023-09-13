@@ -1,0 +1,58 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import type { GetStaticPaths } from "astro";
+import * as data from "../../data.json";
+import { slugify } from "../../scripts/slugify.js";
+
+export const getStaticPaths = (() => {
+  const technologies = data.technology;
+
+  return technologies.map((technology) => {
+    return {
+      params: { technologyName: slugify(technology.name) },
+      props: {
+        technology,
+        navLinks: data.technology.map((tech) => tech.name),
+      },
+    };
+  });
+}) satisfies GetStaticPaths;
+
+const desktopBg =
+  "../../../assets/technology/background-technology-desktop.jpg";
+const tabletBg = "../../../assets/technology/background-technology-tablet.jpg";
+const mobileBg = "../../../assets/technology/background-technology-mobile.jpg";
+
+const { technologyName } = Astro.params;
+const { technology, navLinks } = Astro.props;
+---
+
+<MainLayout
+  title="Technology"
+  technology={true}
+  {navLinks}
+  desktopBg={`url(${desktopBg})`}
+  tabletBg={`url(${tabletBg})`}
+  mobileBg={`url(${mobileBg})`}>
+  <h1 slot="heading">Space launch 101</h1>
+
+  <div slot="text">
+    <h2>Launch Vehicle</h2>
+    <h3>The Technology</h3>
+    <p>
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse rem
+      voluptates temporibus blanditiis! Incidunt hic aperiam, quo porro sed ut
+      assumenda aspernatur excepturi nisi molestias corrupti nulla explicabo
+      sint vero.
+    </p>
+  </div>
+
+  <img slot="content" src={technology.image.webp} alt="" />
+</MainLayout>
+
+<style>
+  h1::before {
+    content: "03";
+    margin-inline-end: 1.5rem;
+  }
+</style>

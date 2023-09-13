@@ -1,33 +1,40 @@
 ---
 import MainLayout from "../../layouts/MainLayout.astro";
+import type { GetStaticPaths } from "astro";
 import * as data from "../../data.json";
 
-export async function getStaticPaths() {
-  return data.destinations.map((destination) => {
+export const getStaticPaths = (() => {
+  const destinations = data.destinations;
+
+  return destinations.map((destination) => {
     return {
-      params: { place: destination.name.toLowerCase() },
+      params: { placeName: destination.name.toLowerCase() },
       props: {
         destination,
-        places: data.destinations.map((destination) => destination.name),
+        navLinks: data.destinations.map((destination) => destination.name),
       },
     };
   });
-}
+}) satisfies GetStaticPaths;
 
-const { place } = Astro.params;
-const { destination, places } = Astro.props;
+const desktopBg = "../../assets/destination/background-destination-desktop.jpg";
+const tabletBg = "../../assets/destination/background-destination-tablet.jpg ";
+const mobileBg = "../../assets/destination/background-destination-mobile.jpg ";
+
+const { placeName } = Astro.params;
+const { destination, navLinks } = Astro.props;
 ---
 
 <MainLayout
   destination={true}
-  navLinks={places}
+  {navLinks}
   title={`Destinations | ${destination.name}`}
-  desktopBg="url(../../assets/destination/background-destination-desktop.jpg)"
-  tabletBg="url(../../assets/destination/background-destination-tablet.jpg)"
-  mobileBg="url(../../assets/destination/background-destination-mobile.jpg)">
+  desktopBg={`url(${desktopBg})`}
+  tabletBg={`url(${tabletBg})`}
+  mobileBg={`url(${mobileBg})`}>
   <h1 slot="heading">Pick your destination</h1>
 
-  <h2 slot="text" class="fancy-heading">{place}</h2>
+  <h2 slot="text" class="fancy-heading">{destination.name}</h2>
   <p slot="text">
     {destination.description}
   </p>
@@ -46,18 +53,8 @@ const { destination, places } = Astro.props;
 </MainLayout>
 
 <style>
-  h1 {
-    font-family: "Barlow Condensed", sans-serif;
-    letter-spacing: 4.72px;
-    text-transform: uppercase;
-    color: var(--white);
-  }
-
   h1::before {
     content: "01";
-    font-weight: 700;
-    color: #fff5;
-    margin-inline-end: 1.5rem;
   }
 
   .main-section__text {

@@ -5,57 +5,55 @@ import * as data from "../../data.json";
 import { slugify } from "../../scripts/slugify.js";
 
 export const getStaticPaths = (() => {
-  return data.crew.map((individual) => {
+  const crewMembers = data.crew;
+
+  return crewMembers.map((crewMember) => {
     return {
-      params: { crew: slugify(individual.name) },
-      props: { individual },
+      params: { crewName: slugify(crewMember.name) },
+      props: {
+        crewMember,
+        navLinks: crewMembers.map((crewMember) => crewMember.name),
+      },
     };
   });
 }) satisfies GetStaticPaths;
 
-const { crew } = Astro.params;
-const { individual } = Astro.props;
-
 const desktopBg = "../../assets/crew/background-crew-desktop.jpg";
 const tabletBg = "../../assets/crew/background-crew-desktop.jpg";
 const mobileBg = "../../assets/crew/background-crew-desktop.jpg";
+
+const { crewName } = Astro.params;
+const { crewMember, navLinks } = Astro.props;
+
 const title = "njing";
 ---
 
 <MainLayout
   crew={true}
   title={title}
-  navLinks={data.crew.map((individual) => individual.name)}
+  {navLinks}
   desktopBg={`url(${desktopBg})`}
   tabletBg={`url(${tabletBg})`}
   mobileBg={`url(${mobileBg})`}>
   <h1 slot="heading">Meet your crew</h1>
 
   <div slot="text" class="heading">
-    <h2 class="fancy-heading">{individual.name}</h2>
-    <h3 class="fancy-heading">{individual.role}</h3>
+    <h2 class="fancy-heading">{crewMember.name}</h2>
+    <h3 class="fancy-heading">{crewMember.role}</h3>
   </div>
 
   <p slot="text">
-    {individual.bio}
+    {crewMember.bio}
   </p>
 
   <div slot="content">
-    <img src={individual.images.webp} alt={individual.name} />
+    <img src={crewMember.images.webp} alt={crewMember.name} />
   </div>
 </MainLayout>
 
 <style>
-  .main-section__content {
-    align-self: end;
-  }
-
-  .main-section__nav {
-    justify-self: start;
-  }
-
-  .main-section a.active {
-    background: var(--white);
+  h1::before {
+    content: "02";
   }
 
   .heading {
