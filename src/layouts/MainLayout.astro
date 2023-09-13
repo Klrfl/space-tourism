@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
+import { slugify } from "../scripts/slugify.js";
 const {
   title,
   desktopBg,
@@ -21,9 +22,13 @@ const {
       { crew: crew },
       { technology: technology },
     ]}>
-    <div class="heading">
-      <slot name="heading" />
-    </div>
+    {
+      !hero && (
+        <div class="heading">
+          <slot name="heading" />
+        </div>
+      )
+    }
 
     <section class="main-section">
       <nav class="main-section__nav">
@@ -43,7 +48,7 @@ const {
             <ul>
               {navLinks.map((navLink: string) => (
                 <li>
-                  <a href="#">
+                  <a href={slugify(navLink)}>
                     <span class="sr-only">{navLink}</span>
                   </a>
                 </li>
@@ -139,19 +144,26 @@ const {
     }
   }
 
-  .hero .main-section {
-    min-height: 100vh;
+  .hero {
+    padding: 0;
+    .main-section {
+      padding-block-end: 3rem;
+      min-height: 100vh;
 
-    display: flex;
-    align-items: end;
-    justify-content: space-between;
-    grid-template-rows: auto 1fr;
-    gap: 2rem;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 2rem;
 
-    @media screen and (max-width: 60em) {
-      justify-content: space-around;
-      flex-direction: column;
-      align-items: center;
+      .main-section__nav {
+        display: none;
+      }
+
+      @media screen and (max-width: 60em) {
+        justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
+      }
     }
   }
 
@@ -161,6 +173,7 @@ const {
     grid-template-areas:
       "content nav"
       "content text";
+    grid-template-rows: auto 1fr;
 
     .main-section__nav {
       justify-self: start;
