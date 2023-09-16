@@ -37,22 +37,25 @@ const { technology, navLinks } = Astro.props;
   <h1 slot="heading">Space launch 101</h1>
 
   <div slot="text">
-    <h2>Launch Vehicle</h2>
+    <h2>{technology.name}</h2>
     <h3>The Technology</h3>
-    <p>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Esse rem
-      voluptates temporibus blanditiis! Incidunt hic aperiam, quo porro sed ut
-      assumenda aspernatur excepturi nisi molestias corrupti nulla explicabo
-      sint vero.
-    </p>
+    <p>{technology.description}</p>
   </div>
 
-  <img slot="content" src={technology.image.webp} alt="" />
+  <picture slot="content">
+    <source srcset={technology.images.landscape} media="(max-width: 60em)" />
+    <img src={technology.images.portrait} alt="" />
+  </picture>
 </MainLayout>
 
 <style>
   h1::before {
     content: "03";
     margin-inline-end: 1.5rem;
+  }
+
+  img {
+    width: 100%;
+    object-fit: cover;
   }
 </style>
