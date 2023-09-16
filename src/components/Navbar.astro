@@ -28,6 +28,7 @@
     padding-block: 2rem;
     position: fixed;
     width: 100%;
+    z-index: 10;
 
     font-family: "Barlow Condensed", sans-serif;
     text-transform: uppercase;
@@ -65,11 +66,15 @@
 
   .nav-links .bg {
     background: #fff2;
-    backdrop-filter: blur(1rem);
+    backdrop-filter: blur(5rem);
     position: absolute;
     inset: 0;
     z-index: -1;
     scale: 140% 1;
+
+    @media screen and (max-width: 60em) {
+      background: #0001;
+    }
   }
 
   .nav-links__header {
